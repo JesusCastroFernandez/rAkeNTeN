@@ -1,0 +1,22 @@
+from qiskit import QuantumCircuit, Aer, execute
+
+# Crear un circuito cuántico de un solo qubit
+circuit = QuantumCircuit(1, 1)
+
+# Aplicar una puerta Hadamard al qubit
+circuit.h(0)
+
+# Medir el qubit
+circuit.measure(0, 0)
+
+# Definir el simulador cuántico
+simulator = Aer.get_backend('qasm_simulator')
+
+# Ejecutar la simulación
+job = execute(circuit, simulator, shots=1000)
+
+# Obtener los resultados de la simulación
+result = job.result()
+counts = result.get_counts(circuit)
+
+print(counts)
